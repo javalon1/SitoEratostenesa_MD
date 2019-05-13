@@ -8,31 +8,35 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj dlugosc zbioru (wieksza niz 2): ");
-        int arrayLenght = scanner.nextInt();
-
-        //Znalezc wszystkie liczby pierwsze ze zbioru < 2 - dlugoscZbioru > i wypelnic nimi tablice
-        int[] liczbyPierwsze = new int[arrayLenght];
-        liczbyPierwsze[0] = 2;
-        int x = 3;
-        for (int i = 1; i < arrayLenght; i++) {
-            if (czyPierwsza(x) == true) {
-                liczbyPierwsze[i] = x;
-            }
-            x++;
+        int dlugoscZbioru = scanner.nextInt();
+        while (dlugoscZbioru < 2) {
+            System.out.println("Podales za mala liczbe, sproboj ponownie: ");
+            dlugoscZbioru = scanner.nextInt();
+        }
+        boolean[] tablica = new boolean[dlugoscZbioru + 1];
+        for (int i = 2; i < dlugoscZbioru + 1; i++) {
+            tablica[i] = true;
         }
 
-        System.out.println(Arrays.toString(liczbyPierwsze));
-    }
 
-
-
-    //Metoda do sprawdzania czy liczba jest pierwsza
-    public static boolean czyPierwsza(int a) {
-        int dzielniki = 0;
-        for (int i = 1; i <= a; i++) {
-            if (a % i == 0) {
-                dzielniki++;
+        for(int i = 2; i < dlugoscZbioru + 1; i++) {
+            int wielokrotnosc = i + i;
+            while (wielokrotnosc < dlugoscZbioru + 1){
+                tablica[wielokrotnosc] = false;
+                wielokrotnosc += i;
             }
-        } return dzielniki == 2;
+        }
+
+        System.out.println(Arrays.toString(tablica));
+
+
+
+
+
+
+
+
+
+
     }
 }
